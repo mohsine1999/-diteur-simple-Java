@@ -1,0 +1,135 @@
+/*EditeurSimple*****************************************************
+import java.awt.*;
+import java.awt.event.*;
+public class EditeurSimple extends Frame implements ActionListener ,ItemListener, 
+WindowListener {
+TextArea t= new TextArea(3,60);
+Label et1 =new Label("Couleurs:");
+Label et2 =new Label("Tailles:");
+Label et3 =new Label("Polices:");
+Choice coul = new Choice();
+Choice tail = new Choice();
+Choice poli = new Choice();
+Button ef = new Button("Effacer");
+Button bo = new Button("Bold");
+Button it = new Button("Italic");
+Button pl = new Button("Plain");
+FlowLayout fl = new FlowLayout();
+EditeurSimple (String titre){
+super(titre);
+setLayout(fl);
+add(t);
+add(et1);
+coul.addItem("RED"); coul.addItem("BLUE");coul.addItem("GREEN");
+coul.addItem("BLACK");coul.addItem("YELLOW"); coul.addItem("ORANGE");coul.addItem("PINK");
+add(coul);
+add(et2);
+tail.addItem("8");tail.addItem("10");tail.addItem("12");
+tail.addItem("14");tail.addItem("16");tail.addItem("18");tail.addItem("20");tail.addItem("22");tail.addItem("24");tail.addItem("26");
+add(tail);
+add(et3);
+poli.addItem("Arial");poli.addItem("Times New Roman");
+poli.addItem("Cambria");poli.addItem("Calibri");
+add(poli);
+add(ef);add(bo);add(it);add(pl);
+ef.addActionListener(this);
+bo.addActionListener(this);
+it.addActionListener(this);
+pl.addActionListener(this);
+tail.addItemListener(this);
+coul.addItemListener(this);
+poli.addItemListener(this);
+addWindowListener(this);
+}
+@Override
+public void actionPerformed(ActionEvent e) {
+String ch, police;
+int taille ,style;
+Font ft;
+if(e.getSource()== ef) {
+t.setText("");
+}
+if(e.getSource()== bo) {
+ch=t.getText();
+ft= t.getFont();
+police =ft.getFamily();
+style =ft.getStyle();
+taille =ft.getSize();
+t.setFont(new Font(police,style+Font.BOLD ,taille));
+t.setText(""); t.setText(ch); 
+}
+if(e.getSource()== it) {
+ch=t.getText();
+ft= t.getFont();
+police =ft.getFamily();
+style =ft.getStyle();
+taille =ft.getSize();
+t.setFont(new Font(police,style+Font.ITALIC ,taille));
+t.setText("");
+t.setText(ch); 
+}
+if(e.getSource()== pl) {
+ch=t.getText();
+ft= t.getFont();
+police =ft.getFamily();
+taille =ft.getSize();
+t.setFont(new Font(police,Font.PLAIN ,taille)); 
+t.setText("");
+t.setText(ch); 
+}
+}
+@Override
+public void itemStateChanged(ItemEvent e) {
+String choix ,ch,police;
+int taille ,style;
+Font ft;
+if(e.getSource()== coul) {
+ch=t.getText();
+choix= coul.getSelectedItem();
+if(choix.equals("RED")) t.setForeground(Color.RED);
+if(choix.equals("BLUE")) t.setForeground(Color.BLUE);
+if(choix.equals("GREEN")) t.setForeground(Color.GREEN);
+if(choix.equals("BLACK")) t.setForeground(Color.BLACK);
+if(choix.equals("YELLOW")) t.setForeground(Color.YELLOW);
+if(choix.equals("ORANGE")) t.setForeground(Color.ORANGE);
+if(choix.equals("PINK")) t.setForeground(Color.PINK);
+t.setText(" "); t.setText(ch);
+
+}
+if(e.getSource()== tail) {
+ch=t.getText();
+ft=t.getFont();
+police= ft.getFamily();
+style =ft.getStyle();
+choix = tail.getSelectedItem();
+taille =Integer.parseInt(choix);
+t.setFont(new Font(police,style,taille));
+t.setText(" "); t.setText(ch);
+}
+if(e.getSource()== poli) {
+ch=t.getText();
+ft=t.getFont();
+style= ft.getStyle();
+taille= ft.getSize();
+police = poli.getSelectedItem();
+t.setFont(new Font(police,style,taille));
+t.setText(" "); t.setText(ch);
+}
+}
+@Override
+public void windowOpened(WindowEvent e) { }
+@Override
+public void windowClosing(WindowEvent e) {
+System.exit(0);
+}
+@Override
+public void windowClosed(WindowEvent e) { }
+@Override
+public void windowIconified(WindowEvent e) { }
+@Override
+public void windowDeiconified(WindowEvent e) { }
+@Override
+public void windowActivated(WindowEvent e) { }
+@Override
+public void windowDeactivated(WindowEvent e) { } 
+}
